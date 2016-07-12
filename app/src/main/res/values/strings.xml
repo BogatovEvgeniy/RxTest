@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">RxTest</string>
+    <string name="here_will_be_putted_text">Here will be putted text</string>
+    <string name="text_to_be_loaded">Text to be loaded</string>
+    <string name="go_to_bluetooth_test">Go to bluetooth test</string>
+</resources>
