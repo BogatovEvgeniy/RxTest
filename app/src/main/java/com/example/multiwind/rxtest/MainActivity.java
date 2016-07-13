@@ -13,6 +13,7 @@ import android.widget.EditText;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscription;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loadText;
     private Button complete;
     private Button error;
+    private Observable<Long> values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,44 +57,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        secondShowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainer, secondFragment);
-                fragmentTransaction.commit();
-            }
-        });
+        secondShowBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentContainer, secondFragment);
+                        fragmentTransaction.commit();
+                    }
+                });
 
-        loadText.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-//                String s = String.valueOf(textToBeLoaded.getText());
-//                int i = 0;
-//                while (isWorking) {
-//                    subject.onNext(s + i++);
-//                }
-            }
-        });
-
-        complete.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-//         subject.onCompleted();
-                                            isWorking = false;
-                                        }
-                                    }
+        complete.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        isWorking = false;
+                    }
+                }
         );
 
 
-        error.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-//          subject.onError(new Throwable());
-                                         isWorking = false;
-                                     }
-                                 }
+        error.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        isWorking = false;
+                    }
+                }
         );
     }
 
@@ -109,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
     private Observable<String> initObservers() {
         final Observable<String> just = Observable.just("one", "two", "three");
         final Observable<String> empty = Observable.empty();
-        Observable<Long> values = Observable.interval(1000, TimeUnit.MILLISECONDS);
+//        values = Observable.interval(1000, TimeUnit.MILLISECONDS);
         empty.subscribe(new OnNextAction<String>("empty"), new OnErrorAction("empty"), new OnCompleate("empty"));
         just.subscribe(new OnNextAction<String>("just"), new OnErrorAction("just"), new OnCompleate("just"));
-        values.subscribe(new OnNextAction<Long>("values"), new OnErrorAction("values"), new OnCompleate("values"));
+//        Subscription subscribe = values.subscribe(new OnNextAction<Long>("values"), new OnErrorAction("values"), new OnCompleate("values"));
         return just;
     }
 
