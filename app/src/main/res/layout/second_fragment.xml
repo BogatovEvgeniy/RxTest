@@ -1,14 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/loadedText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="16sp"
-        android:hint="@string/here_will_be_putted_text"/>
+    <data>
 
-</LinearLayout>
+        <import type="android.view.View" />
+
+        <variable
+            name="factorial"
+            type="com.example.multiwind.rxtest.Factorial" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/loadedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/here_will_be_putted_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="The form for calculating factorial from smth"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Input factorial value"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/factorial_value"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/calculate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calc"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{factorial.res == 0 ? View.VISIBLE : View.INVISIBLE}"/>
+
+        />
+
+        <TextView
+            android:id="@+id/processOfCalculation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Input factorial value"
+            android:text="@{factorial.calcProc}"
+            android:visibility="@{factorial.res == 0 ? View.INVISIBLE : View.VISIBLE }" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Input factorial value"
+                android:text="Result is:"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{factorial.res}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
